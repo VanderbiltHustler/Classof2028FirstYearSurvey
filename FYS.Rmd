@@ -1,0 +1,109 @@
+
+---
+title: "FYS"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(tidyverse)
+```
+
+```{r}
+df <- read_csv('/Users/ethanxu/Downloads/responses.csv')
+
+df_cleaned <- df %>% 
+  filter(`I confirm that I am a member of Vanderbilt's Class of 2028.` == "Yes, I am") %>% 
+  select(
+    `Where did Vanderbilt fall in your ranking of all of the schools you applied to?`,
+    `If you took the SAT, what was your score?`,
+    `If you took the ACT, what was your score?`,
+    `Did you pay for admissions assistance in your college application process?`,
+    `Select the top three reasons why you chose to attend Vanderbilt.`,
+    `Which of these activities did you attend before coming to Vanderbilt?`
+  )
+
+df_cleaned
+```
+
+```{r}
+df_ranking <- df_cleaned %>% 
+  count(`Where did Vanderbilt fall in your ranking of all of the schools you applied to?`) 
+
+custom_labels <- c("First Choice", "Top Choice", "Not Top Choice", "Did Not Rank")
+ggplot(df_ranking, aes(x = reorder(`Where did Vanderbilt fall in your ranking of all of the schools you applied to?`, -n), y = n)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(title = "Where did Vanderbilt Students want to go?", x = "Ranking", y = "Count") +
+  scale_x_discrete(labels = custom_labels)
+```
+
+```{r}
+adm_counts <- df_cleaned %>% 
+  count(`Did you pay for admissions assistance in your college application process?`)
+
+adm_counts
+```
+
+```{r}
+df_cleaned <- df_cleaned %>%
+  mutate(standardized_testing = if_else(str_detect(`Did you pay for admissions assistance in your college application process?`, "standardized testing"), "With Standardized Testing", "Without Standardized Testing"))
+
+grouped_testing_scores <- df_cleaned %>%
+  group_by(standardized_testing) %>%
+  summarise(
+    mean_sat = mean(`If you took the SAT, what was your score?`, na.rm = TRUE),
+    mean_act = mean(`If you took the ACT, what was your score?`, na.rm = TRUE)
+  )
+
+grouped_testing_scores
+
+ggplot(grouped_testing_scores, aes(x = standardized_testing)) +
+  geom_bar(aes(y = mean_sat), stat = "identity", position = position_dodge(), fill = "skyblue", width = 0.4) +
+  labs(title = "Mean SAT Scores by Standardized Testing Assistance",
+       x = "Did you receive testing assistance?",
+       y = "Mean SAT Score") +
+  coord_cartesian(ylim = c(0, 1600)) +
+  scale_y_continuous(labels = scales::comma)
+
+ggplot(grouped_testing_scores, aes(x = standardized_testing)) +
+  geom_bar(aes(y = mean_act), stat = "identity", position = position_dodge(), fill = "skyblue", width = 0.4) +
+  labs(title = "Mean ACT Scores by Standardized Testing Assistance",
+       x = "Did you receive testing assistance?",
+       y = "Mean ACT Score") +
+  coord_cartesian(ylim = c(0, 36)) +
+  scale_y_continuous(labels = scales::comma)
+```
+
+
+```{r}
+reasons <- df_cleaned %>%
+  separate_rows(`Select the top three reasons why you chose to attend Vanderbilt.`, sep = ", ") %>%
+  count(`Select the top three reasons why you chose to attend Vanderbilt.`) %>%
+  arrange(desc(n))
+
+ggplot(reasons, aes(x = reorder(`Select the top three reasons why you chose to attend Vanderbilt.`, n), y = n)) +
+  geom_bar(stat = "identity", fill = "lightcoral") +
+  labs(title = "Top Reasons for Choosing Vanderbilt", x = "Reason", y = "Count") +
+  coord_flip()
+```
+
+```{r}
+activities <- df_cleaned %>%
+  separate_rows(`Which of these activities did you attend before coming to Vanderbilt?`, sep = ", ") %>%
+  count(`Which of these activities did you attend before coming to Vanderbilt?`) %>%
+  arrange(desc(n))
+
+activities
+```
+
+```{r}
+activities <- activities %>%
+  mutate(`Which of these activities did you attend before coming to Vanderbilt?` = 
+           if_else(`Which of these activities did you attend before coming to Vanderbilt?` %in% c("Dore For A Day", "'Dore For A Day"), "'Dore For A Day", `Which of these activities did you attend before coming to Vanderbilt?`))
+activities
+
+ggplot(activities, aes(x = reorder(`Which of these activities did you attend before coming to Vanderbilt?`, n), y = n)) +
+  geom_bar(stat = "identity", fill = "dodgerblue") +
+  labs(title = "Events Attended Before Vanderbilt", x = "Activity", y = "Count") +
+  coord_flip()
+```
