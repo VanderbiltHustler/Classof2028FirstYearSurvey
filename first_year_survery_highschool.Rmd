@@ -1,0 +1,245 @@
+---
+title: "HW1.2"
+output: html_document
+date: "2024-09-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+df <- read.csv("C:\\Users\\Hoang\\OneDrive\\Desktop\\first_year_survery\\first_years_survey.csv")
+df <- df%>%
+  mutate(school_type = What.type.of.secondary.high.school.did.you.attend.)%>%
+  mutate(taken_AP = How.many.of.each.type.of.these.classes.did.you.take.in.High.School...Select.0.10...AP.Classes.) %>%
+  mutate(taken_IB = How.many.of.each.type.of.these.classes.did.you.take.in.High.School...Select.0.10...IB.Classes.)%>%
+  mutate(honor_taken = How.many.of.each.type.of.these.classes.did.you.take.in.High.School...Select.0.10...Honors.)%>%
+  mutate(dual_taken = How.many.of.each.type.of.these.classes.did.you.take.in.High.School...Select.0.10...Dual.Enrollment.)%>%
+  mutate(extracurriculars = What.extracurriculars.were.you.involved.in.high.school..Please.separate..Other..responses.with.a.comma.)%>%
+  mutate(AI = Have.you.ever.used.AI.for.academic.work..in.high.school.or.college..)%>%
+  mutate(AI_purpose = If.yes..in.which.ways.have.you.used.AI.for.academic.work.)%>%
+  mutate(admission_cycle = What.admissions.cycle.were.you.accepted.in.)%>%
+  mutate(num_of_college_applied = How.many.colleges.and.universities.did.you.apply.to..including.Vanderbilt..)%>%
+  mutate(college_applied = If.you.applied.to.other.universities..what.other.universities.were.you.accepted.to..Please.separate.each.university.name.with.a.comma.)%>%
+  mutate(sat = What.standardized.test.s..did.you.take...SAT.)%>%
+  mutate(sat_score = If.you.took.the.SAT..what.was.your.score.)%>%
+  mutate(act = What.standardized.test.s..did.you.take...ACT.)%>%
+  mutate(act_score = If.you.took.the.ACT..what.was.your.score.)
+
+```
+
+
+#Did more people who did applied early submitted SAT/ACT Compared to Regular Decision People?
+```{r}
+df%>%
+  select(admission_cycle, sat)%>%
+  group_by(admission_cycle)%>%
+  count(sat)%>%
+  ggplot(aes(sat, n))+
+  geom_bar(stat = 'identity')+
+  facet_wrap(~admission_cycle)
+
+df%>%
+  select(admission_cycle, act)%>%
+  group_by(admission_cycle)%>%
+  count(act)%>%
+  ggplot(aes(act, n))+
+  geom_bar(stat = 'identity')+
+  facet_wrap(~admission_cycle)
+
+```
+#In the Regular Decision Cycle and ED, people are more likely to not submit an SAT or ACT score. People who took the SAT or ACT tend to submit it. 
+
+#Most popular activities
+```{r}
+df_extracurriculars_split<-df%>%
+  select(extracurriculars)
+
+df_extracurriculars_split<-separate_rows(df, extracurriculars, sep = ", ")
+
+df_extracurriculars_split%>%
+  select(extracurriculars)%>%
+  count(extracurriculars)%>%
+  arrange(desc(n))
+```
+#Some of the popular extracurriculars student particapted in is Community service, academic clubs/competition, athletics, paid work, and musics. 
+
+#Student SAT and ACT score range
+```{r}
+df%>%
+  select(sat_score)%>%
+  drop_na()%>%
+  ggplot(aes(sat_score))+
+  geom_boxplot()
+
+df%>%
+  select(act_score)%>%
+  drop_na()%>%
+  ggplot(aes(act_score))+
+  geom_boxplot()
+
+```
+
+
+#AI used?
+```{r}
+df%>%
+  select(AI)%>%
+  count(AI)
+
+df_AI_purpose_split <- separate_rows(df, AI_purpose, sep = ", ")
+
+df_AI_purpose_split%>%
+  select(AI, AI_purpose)%>%
+  filter(!(AI == "No"))%>%
+  count(AI_purpose)%>%
+  arrange(desc(n))
+```
+# 93/260 people don't use AI, 91/260 used AI in both college and high school while 14/260 started to used AI in college and 62/260 used AI in high school but not in college. The most popular use of AI is research (100/260), writing(86/260), coding(33/260), and math(63/260).
+
+#Mean of sat/act score for each admission cycle
+```{r}
+#Average of people who took the SAT or ACT
+df%>%
+  select(admission_cycle, sat_score)%>%
+  drop_na()%>%
+  group_by(admission_cycle)%>%
+  summarise(avg_sat = mean(sat_score))
+
+df%>%
+  select(admission_cycle, act_score)%>%
+  drop_na()%>%
+  group_by(admission_cycle)%>%
+  summarise(avg_act = mean(act_score))
+
+
+#if they submit SAT or ACT score
+df%>%
+  select(admission_cycle, sat, sat_score)%>%
+  filter(sat == "Yes, and I submitted it")%>%
+  drop_na()%>%
+  group_by(admission_cycle)%>%
+  summarise(avg_sat = mean(sat_score))
+
+df%>%
+  select(admission_cycle, act, act_score)%>%
+  filter(act == "Yes, and I submitted it")%>%
+  drop_na()%>%
+  group_by(admission_cycle)%>%
+  summarise(avg_act = mean(act_score))
+
+
+```
+#For SAT score, ED has the highest mean sat score, with 1472 the mean for ED1 and 1474 the mean for EDII. Regualar decision have sat score of 1461 and people off the waitlist has 1469.
+
+#For ACT score, it is more far away, but ED are slightly higher with EDI having a mean of 32.8 and EDII having 32.6 while regular decision has a mean of 32.3 and waitlisted has 32.2
+
+#For those that did submit SAT, the EDI and EDII average is 1534 and 1531 respectfully. While Regular decision have an average of 1511 and off the waitlist have an average of 1522.
+
+#For those that did submit ACT, the EDI and EDII average is 34.6 and 34.8 respectfully. While Regular decision have an anverage 34.61 and off the waitlist have an average of 33.9
+
+
+
+#Advanced class taken
+```{r}
+df%>%
+  select(taken_AP)%>%
+  count(taken_AP)%>%
+  arrange(desc(n))
+
+df%>%
+  select(taken_IB)%>%
+  count(taken_IB)%>%
+  arrange(desc(n))
+
+df%>%
+  select(honor_taken)%>%
+  count(honor_taken)%>%
+  arrange(desc(n))
+
+df%>%
+  select(dual_taken)%>%
+  count(dual_taken)%>%
+  arrange(desc(n))
+```
+#Around 71/226 people who was offered AP took 10 or more AP class while 209/260 people came from school that does not offer IB. Also 104/260 came from school that does not offer dual enrollment and those that do, 58/156 didn't take any dual enrollment class. For honor class, 87/213 who was offered honors took 10+. 
+
+#What other school did people applied to?
+```{r}
+df_college_splited <- separate_rows(df, college_applied, sep = ", ")
+
+df_college_splited %>%
+  select(college_applied)%>%
+  count(college_applied)%>%
+  arrange(desc(n))
+```
+#(this is not accurate due to the way people inputted their answer) Some of the most popular college other people applied to is University of Georgia, Boston College, Georgia Tech, Penn Stat, Purdue, and UVA.
+
+#Do people who used AI in highschool take more advanced class?
+```{r}
+#see if people who take more AP used AP more
+df%>%
+  select(AI, taken_AP)%>%
+  filter(!(taken_AP == "My school did not offer"))%>%
+  mutate(AI = if_else(AI == "No" | AI == "Yes, in college but not in high school", "No in High School", "Yes in High School"))%>%
+  group_by(AI)%>%
+  count(taken_AP)%>%
+  ggplot(aes(taken_AP, n, fill = AI))+
+  geom_bar(stat = 'identity', position = 'dodge')
+
+df%>%
+  select(AI, taken_IB)%>%
+  filter(!(taken_IB == "My school did not offer"))%>%
+  mutate(AI = if_else(AI == "No" | AI == "Yes, in college but not in high school", "No in High School", "Yes in High School"))%>%
+  group_by(AI)%>%
+  count(taken_IB)%>%
+  ggplot(aes(taken_IB, n, fill = AI))+
+  geom_bar(stat = 'identity', position = 'dodge')
+
+df%>%
+  select(AI, honor_taken)%>%
+  filter(!(honor_taken == "My school did not offer"))%>%
+  mutate(AI = if_else(AI == "No" | AI == "Yes, in college but not in high school", "No in High School", "Yes in High School"))%>%
+  group_by(AI)%>%
+  count(honor_taken)%>%
+  ggplot(aes(honor_taken, n, fill = AI))+
+  geom_bar(stat = 'identity', position = 'dodge')
+
+df%>%
+  select(AI, dual_taken)%>%
+  filter(!(dual_taken == "My school did not offer"))%>%
+  mutate(AI = if_else(AI == "No" | AI == "Yes, in college but not in high school", "No in High School", "Yes in High School"))%>%
+  group_by(AI)%>%
+  count(dual_taken)%>%
+  ggplot(aes(dual_taken, n, fill = AI))+
+  geom_bar(stat = 'identity', position = 'dodge')
+
+
+#See if people who took less dual credit take more AP, honor, or IB?
+
+df%>%
+  select(AI, taken_AP, taken_IB, honor_taken, dual_taken)%>%
+  mutate(dual_taken = if_else(dual_taken == "10+", "10", dual_taken))%>%
+  mutate(dual_taken = if_else(dual_taken == "My school did not offer", "0", dual_taken))%>%
+  mutate(dual_taken = as.numeric(dual_taken))%>%
+  mutate(honor_taken = if_else(honor_taken == "10+", "10", honor_taken))%>%
+  mutate(honor_taken = if_else(honor_taken == "My school did not offer", "0", honor_taken))%>%
+  mutate(honor_taken = as.numeric(honor_taken))%>%
+  mutate(taken_AP = if_else(taken_AP == "10+", "10", taken_AP))%>%
+  mutate(taken_AP = if_else(taken_AP == "My school did not offer", "0", taken_AP))%>%
+  mutate(taken_AP = as.numeric(taken_AP))%>%
+  mutate(taken_IB = if_else(taken_IB == "10+", "10", taken_IB))%>%
+  mutate(taken_IB = if_else(taken_IB == "My school did not offer", "0", taken_IB))%>%
+  mutate(taken_IB = as.numeric(taken_IB))%>%
+  mutate(advance_other = taken_IB + taken_AP + honor_taken)%>%
+  group_by(dual_taken)%>%
+  summarise(avg_advance_other = mean(advance_other))%>%
+  ggplot(aes(dual_taken, avg_advance_other))+
+  geom_point()+
+  geom_smooth(method = "lm")
+  
+```
+#People who take more AP, Honor, or IB tend to use AI then not use AI, except for those who took Dual Enrollment who less people who took Dual Enrollment use AI more. Does this mean people who took less Dual Enrollment took more AP, Honor, or IB class? Overall the less dual class people take, the more honor, AP, or IB class people take on average.
