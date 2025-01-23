@@ -1,9 +1,10 @@
-# Class of 2027 First Year Survey
-Last Updated: 10/20/2024 <br>
+# Class of 2028 First Year Survey
+Last Updated: 01/22/2025 <br>
 ### This story is part of The Vanderbilt Hustler Data Section's series of biannual First-Year and Senior Surveys, exploring the demographics, high school experience, admissions experience, college life, politics and lifestyle of the Class of 2028.
 
 ## Deployment History
 - 10/20/2024: Created data folders
+- 01/22/2025: Updates ReadMe
 
 ## Credits
 
