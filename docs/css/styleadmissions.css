@@ -3,10 +3,10 @@
 header {
   /* add header image below */
   /* can use a file path before the photo is uploaded to ceo */
-  background: url("https://iili.io/JAiLPLu.jpg alt='Two fem presenting students stand outside on campus.'"); 
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top; /* adjusts image placement, can also be set as percentages */
+  background: url('../images/B&WManRidingBikeWyattCenter2024.09.21.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;/* adjusts image placement, can also be set as percentages */
 
 
   /* note: there are many alternative ways to style the header
@@ -28,6 +28,7 @@ header {
 }
 
 /* SET ANY MORE STYLES YOU WANT HERE: */
+
 
 .box-container {
 display: flex;

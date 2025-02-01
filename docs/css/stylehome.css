@@ -12,11 +12,10 @@
 header {
     /* add header image below */
     /* can use a file path before the photo is uploaded to ceo */
-    background: url('https://iili.io/JAQZh2s.jpg" alt="JAY4ZPV.jpg'); 
+    background: url('../images/SpikeballOutsideEBI2024.11.20IB.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center; /* adjusts image placement, can also be set as percentages */
-
+    background-position: center center;
 }
 
 
