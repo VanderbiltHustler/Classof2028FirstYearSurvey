@@ -12,27 +12,10 @@
 header {
     /* add header image below */
     /* can use a file path before the photo is uploaded to ceo */
-    background: url('https://iili.io/JAQZh2s.jpg" alt="JAY4ZPV.jpg'); 
+    background: url('../images/SpikeballOutsideEBI2024.11.20IB.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center; /* adjusts image placement, can also be set as percentages */
-
-    /* note: there are many alternative ways to style the header
-        other than a photo and 2 headlines. 
-
-        Here are some other IDS examples, you can inspect the code to 
-        see how they did it: 
-
-        Headlines that fade in: http://specials.idsnews.com/iu-kappa-kappa-gamma-sorority-hazing-big-little/
-        Header with a video: http://specials.idsnews.com/bloomington-bluebird-bar-coronavirus-guidelines/
-        Animated header: http://specials.idsnews.com/iu-president-michael-mcrobbie-speeches-gpt-2/
-        Another animated/fade-in header: http://specials.idsnews.com/steve-moore-almost-died-coronavirus-bloomington/
-        Header with multiple photos: http://specials.idsnews.com/what-wasnt-said-racism-indiana-university-bloomington-iu/
-        Dramatic photo header: http://specials.idsnews.com/iu-coronavirus-testing/
-        Cute animation header: http://specials.idsnews.com/will-your-mail-in-ballot-arrive-in-time-to-count-usps-election-2020/index.html
-        Cool typography (from W+P): http://specials.idsnews.com/a-little-less-than-kind-iu-theater-bloomington/index.html
-        Not full width header: http://specials.idsnews.com/how-iu-does-its-laundry/
-    */
+    background-position: center center;
 }
 
 
@@ -54,23 +37,6 @@ header {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-/*.box {*/
-/*  width: 30%;*/
-/*  margin: 10px;*/
-/*  padding: 7px;*/
-/*  background-color: #8E6600;*/
-/*  border: 4px solid #000000;*/
-/*  text-align: center;*/
-/*  padding-top: 10px;*/
-/*  cursor: pointer;*/
-/*  transition: background-color 0.3s;*/
-/*  overflow-wrap: break-word; !* Alternative property for better word wrap *!*/
-/*}*/
-
-/*.box:hover {*/
-/*  background-color: #F2EEE3;*/
-/*}*/
 
 .dropdown {
   display: none; /* Initially hide the dropdown */
@@ -110,16 +76,6 @@ footer .col-md-3 {
 }
 
 
-/* MEDIA QUERIES FROM SMALLEST TO LARGEST = MOBILE FIRST */
-/* use these for responsive design — you can set different styles based on how wide the screen is */
-/* Extra small devices (portrait phones, less than 576px)
-No media query for `xs` since this is the default */
-
-/* Small devices (landscape phones, 576px and up) */
-/*@media (min-width: 576px) { 
-    
-} */
-
 @media (max-width: 1000px) {
   header {
     background: url('https://iili.io/JAQZh2s.jpg alt="Four students lounge on Alumni Lawn on a sunny day with their backs to the camera. One student in the background sits with a laptop on a blue chair."');
@@ -128,28 +84,6 @@ No media query for `xs` since this is the default */
     background-position: center center;
   }
 }
-
-/* Medium devices (tablets, 768px and up) */
-/*@media (min-width: 768px) {
-    header {
-        /* adjust header image positioning for larger devices if needed */
-        /* you can also change the header image for mobile here */
-        /* background-position: 50% 50%; 
-    } 
-  }
-*/
-
-
-/* Large devices (desktops, 992px and up) */
-/*@media (min-width: 992px) {
-
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-/*@media (min-width: 1200px) {
-
-}
-*/
 
 .box-container {
   display: flex;
@@ -185,4 +119,139 @@ No media query for `xs` since this is the default */
   text-align: center;
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.photo-gallery {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  position: relative;
+  overflow: hidden;
+  background-color: #D6B464;
+  padding: 2rem 0;
+}
+
+.gallery-track {
+  display: flex;
+  animation: scroll 40s linear infinite;
+  width: max-content;
+}
+
+.gallery-track img {
+  height: 300px;
+  width: 400px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: 1rem;
+}
+
+.gallery-track img:last-child {
+  margin-right: 0;
+}
+
+.gallery-track img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200% / 3));
+  }
+}
+
+.gallery-track:hover {
+  animation-play-state: paused;
+}
+
+body {
+  position: relative;
+  background: linear-gradient(135deg, #000000 0%, #D6B464 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+a {
+  color: #D6B464;
+}
+
+.photo-gallery {
+  background-color: transparent;
+}
+
+.survey-section {
+  width: 100%;
+  padding: 4rem 4rem;
+  background: transparent;
+  overflow: hidden;
+}
+
+.survey-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8rem;
+  align-items: flex-start;
+}
+
+.survey-text {
+  flex: 2;
+}
+
+.survey-stats {
+  flex: 1;
+  padding-top: 4.5rem;
+}
+
+.survey-text h3 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.survey-text p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #ffffff;
+  max-width: 800px;
+}
+
+.survey-stats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.survey-stats li {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  color: #ffffff;
+  font-weight: 300;
+  white-space: nowrap;
 }

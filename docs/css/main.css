@@ -29,7 +29,7 @@ html {
 /* Will create a warning in the W3C CSS validator */
 /* Ignore that - CSS variables are fine to use */
 :root {
-    --footer: #F2EEE3;
+    --footer: #000000;
     --gray: rgb(0, 0, 0, 0.1);
 }
 
