@@ -3,7 +3,8 @@
 header {
     /* add header image below */
     /* can use a file path before the photo is uploaded to ceo */
-    background: url("https://iili.io/JAi47kX.jpg alt='Students study in the basement of Mayborn. There are four booths with one student in each booth on their laptops."); 
+    /* background: url("https://iili.io/JAi47kX.jpg alt='Students study in the basement of Mayborn. There are four booths with one student in each booth on their laptops.");  */
+    background: url("../images/LightningZEV4VandyRideAtHQ2023.11.04RY-1-Copy.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top; /* adjusts image placement, can also be set as percentages */
@@ -77,8 +78,12 @@ header {
 
 /* Optional: Add some space around the image */
 .container {
-  padding-top: 4px;
   padding-bottom: 8px;
+  padding-top: 2rem !important;
+}
+
+footer {
+  margin-top: 0px;
 }
 
 footer .col-md-3 {

@@ -76,8 +76,12 @@ header {
 
 /* Optional: Add some space around the image */
 .container {
-  padding-top: 4px;
+  padding-top: 2rem !important;
   padding-bottom: 8px;
+}
+
+footer {
+  margin-top: 0px;
 }
 
 footer .col-md-3 {

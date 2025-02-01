@@ -12,7 +12,9 @@
 header {
     /* add header image below */
     /* can use a file path before the photo is uploaded to ceo */
-    background: url('../images/SpikeballOutsideEBI2024.11.20IB.jpeg');
+    background: 
+    /* linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%),  */
+    url('../images/SpikeballOutsideEBI2024.11.20IB.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -33,9 +35,16 @@ header {
 }
 
 .box-container {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-around; */
+  
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  /* grid-template-columns: repeat(3, 1fr); */
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .dropdown {
@@ -67,8 +76,12 @@ header {
 
 /* Optional: Add some space around the image */
 .container {
-  padding-top: 4px;
+  padding-top: 0rem !important;
   padding-bottom: 8px;
+}
+
+footer {
+  margin-top: 0px;
 }
 
 footer .col-md-3 {
@@ -94,46 +107,57 @@ footer .col-md-3 {
 }
 
 .box {
-  width: 180px;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 200px;
+  height: 200px;
   background-color: #8B6A2A;
   border: 2px solid black;
   border-radius: 50%;
-  text-align: center;
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #F3E8C8;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.box h5 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  /* text-transform: lowercase; */
+}
+
 .box:hover {
-  transform: scale(1.5);
+  transform: scale(1.08);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.categories-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
 .categories-title {
   text-align: center;
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .photo-gallery {
-  width: 100vw;
+  width: 100%;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   position: relative;
   overflow: hidden;
   background-color: #D6B464;
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
+  padding-top: 3rem;
+  padding-bottom: 0rem;
 }
 
 .gallery-track {
   display: flex;
-  animation: scroll 40s linear infinite;
+  animation: scroll 50s linear infinite;
   width: max-content;
 }
 
@@ -160,13 +184,15 @@ footer .col-md-3 {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-200% / 3));
+    /* transform: translateX(calc(-200% / 3)); */
+    transform: translateX(-50%);
   }
 }
 
-.gallery-track:hover {
+/* ADD TO PAUSE GALLERY SCROLL ON HOVER (a bit jarring) */
+/* .gallery-track:hover {
   animation-play-state: paused;
-}
+} */
 
 body {
   position: relative;
@@ -205,7 +231,11 @@ a {
 
 .survey-section {
   width: 100%;
-  padding: 4rem 4rem;
+  /* padding: 4rem 4rem; */
+  padding-top: 0rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
+  padding-bottom: 0rem;
   background: transparent;
   overflow: hidden;
 }
@@ -214,7 +244,7 @@ a {
   max-width: 1600px;
   margin: 0 auto;
   display: flex;
-  gap: 8rem;
+  gap: 4rem;
   align-items: flex-start;
 }
 
@@ -228,7 +258,7 @@ a {
 }
 
 .survey-text h3 {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 1.5rem;
   color: #ffffff;
   font-weight: bold;
@@ -236,7 +266,7 @@ a {
 }
 
 .survey-text p {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   color: #ffffff;
   max-width: 800px;
@@ -249,7 +279,8 @@ a {
 }
 
 .survey-stats li {
-  font-size: 2rem;
+  margin-top: 3.5rem;
+  font-size: 2.5rem;
   margin-bottom: 2.5rem;
   color: #ffffff;
   font-weight: 300;
