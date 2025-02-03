@@ -3,11 +3,11 @@
     DROPDOWN MENU
     Adapted from Erika Lee's I360 course: https://codepen.io/ebigalee/pen/dyydovo
 */
-function toggleDropdown() {
-    const socials = document.querySelector('.item');
-    socials.classList.toggle('show');
-}
-document.querySelector('.toggle').addEventListener('click', toggleDropdown);
+// function toggleDropdown() {
+//     const socials = document.querySelector('.item');
+//     socials.classList.toggle('show');
+// }
+// document.querySelector('.toggle').addEventListener('click', toggleDropdown);
 
 /*
     GRAPH BUTTON
@@ -48,6 +48,15 @@ $(this).each(function() {
     instances.push(new moveItItem($(this)));
 });
 
+
+const toggleBtn = document.querySelector('.toggle button'); 
+  const dropdownEl = document.querySelector('.item.dropdown');
+
+  toggleBtn.addEventListener('click', () => {
+    // Toggle a “show” class on the .dropdown
+    dropdownEl.classList.toggle('show');
+  });
+
 window.addEventListener('scroll', function() {
     var scrollTop = $window.scrollTop();
     instances.forEach(function(inst){
@@ -69,4 +78,3 @@ moveItItem.prototype.update = function(scrollTop) {
 $(function() {
     $('[data-scroll-speed]').moveIt();
 });
-

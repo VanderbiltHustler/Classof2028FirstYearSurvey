@@ -20,7 +20,6 @@ header {
     background-position: center center;
 }
 
-
 /* SET ANY MORE STYLES YOU WANT HERE: */
 .arrow-container {
   position: fixed;
@@ -79,6 +78,16 @@ header {
   padding-top: 0rem !important;
   padding-bottom: 8px;
 }
+
+
+li.toggle {
+  display: none;
+}
+
+.toggle .button {
+  display: none;
+}
+
 
 footer {
   margin-top: 0px;
@@ -244,9 +253,10 @@ a {
   max-width: 1600px;
   margin: 0 auto;
   display: flex;
-  gap: 4rem;
+  gap: 1rem;
   align-items: flex-start;
 }
+
 
 .survey-text {
   flex: 2;
@@ -254,7 +264,7 @@ a {
 
 .survey-stats {
   flex: 1;
-  padding-top: 4.5rem;
+  padding-top: 5rem;
 }
 
 .survey-text h3 {
@@ -279,10 +289,187 @@ a {
 }
 
 .survey-stats li {
-  margin-top: 3.5rem;
+  margin-top: 0.5rem;
   font-size: 2.5rem;
   margin-bottom: 2.5rem;
   color: #ffffff;
   font-weight: 300;
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  header {
+    justify-content: center;
+  }
+  
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Center the ABOUT link */
+  header nav ul li.item {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  header nav ul li.toggle {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .item.dropdown {
+    display: none;
+    position: absolute; 
+    top: 3.5rem;    /* below header */
+    right: 1rem;    /* align to the right edge of screen */
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .item.dropdown.show {
+    display: block;  /* Now it’s visible when .show is toggled */
+  }
+
+  /* Make the dropdown links display in a vertical stack */
+  .item.dropdown .dropdown-content a {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #000;
+  }
+
+  li.toggle {
+    display: block;
+    text-align: center;
+  }
+
+  #surveyLink h8 {
+      font-size: 1.2rem;
+      white-space: nowrap;
+  }
+
+  .survey-text h3 {
+      font-size: 2.5rem;
+      margin-bottom: 0rem;
+  }
+
+  .survey-section {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .survey-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .survey-stats {
+      padding: 1rem;
+  }
+
+  .toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .item.dropdown {
+    display: none !important; /* Ensure it's hidden on larger screens */
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  header nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5px;
+  }
+
+  .item.dropdown {
+    display: none;
+  }
+
+  /* When .item.dropdown has "show," make it appear */
+  .item.dropdown.show {
+    display: block;
+  }
+
+  .item.dropdown .dropdown-content {
+    display: block; 
+    background-color: #fff; 
+    border: 1px solid #ccc;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  .item.dropdown .dropdown-content a {
+    display: block;
+    padding: 0.5rem;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .item.dropdown .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+
+  #surveyLink h8 {
+      font-size: 1rem;
+      text-align: center;
+      margin: 5px 0;
+      white-space: normal;
+  }
+
+  /* .fas .fa-bars .fa-lg {
+    aria-hidden: false;
+  } */
+
+  .toggle {
+      display: block;
+      cursor: pointer;
+      margin-right: 1rem;
+  }
+
+  .toggle button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #000; // 
+  }
+
+  .dropdown-content {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+  }
+
+  .toggle.active + .dropdown-content {
+      display: flex;
+  }
+
+  .survey-text h3 {
+      font-size: 2rem;
+      text-align: center;
+  }
+
+  .survey-text p {
+      font-size: 1.5rem;
+      padding: 0 1rem;
+  }
+
+  .survey-stats {
+      text-align: center;
+      padding: 1rem 0;
+  }
 }
