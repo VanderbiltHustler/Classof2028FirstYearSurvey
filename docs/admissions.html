@@ -120,7 +120,7 @@
     var surveyLink = document.getElementById('homeLabel');
 
     // Check if the screen width is less than or equal to 768px (for mobile devices)
-    if (window.innerWidth <= 768 && window.innerWidth => 500) {
+    if (window.innerWidth <= 768 && window.innerWidth >= 500) {
         surveyLink.innerHTML = '<h9> THE SURVEY&nbsp; </h9>'; // Change the text content
     }
 
@@ -135,16 +135,16 @@
             <div class="row justify-content-center">
             <div class="col-md-6 story"> 
     
-                <p><small><em>Black-and-white photograph of a man riding a bicycle with Wyatt Center in the background, photographed on Sept. 21, 2024. (Hustler Multimedia/ George Albu)</em></small></p>
-                <p>[add text]</p>
+                <p><small><em>Students conversing on the lawn, as photographed on Aug. 27, 2024 (Hustler Multimedia/Sean Onamade)</em></small></p>
+                <p>First-year students answered questions about the admissions process, including the reason they chose to attend Vanderbilt and other schools they applied to. Among respondents, 43% were admitted to the university through regular decision, while 20% joined through <a href="https://vanderbilthustler.com/2023/12/15/first-members-of-class-of-2028-welcomed-to-vanderbilt-via-early-decision-i/">early decision I</a> and 18% through <a href="https://vanderbilthustler.com/2023/02/20/vanderbilt-admits-15-7-of-early-decision-applicants-record-low/">early decision II.</a></p>
 
                 <section class="box-container">
-                    <div class="box" onclick="changeChart0('pcmxT', '1');">
+                    <div class="box" onclick="changeChart0('PSIWJ', '1');">
                         <h5>ADMISSIONS CYCLE</h5>
                     </div>
-                    <div class="box" onclick="changeChart0('q2fLm', '1');">
+                    <!-- <div class="box" onclick="changeChart0('q2fLm', '1');">
                         <h5>NUMBER OF APPLICATIONS</h5>
-                    </div>
+                    </div> -->
                 </section>
                 
                 <section class="graph-container">
@@ -153,15 +153,15 @@
                     </figure>
                 </section>
 
-                <p>[add text]</p>
+                <p>Respondents were also asked about whether they utilized some form of admissions assistance when applying to schools. Approximately 91% of students who came from a household income under $50,000 said they did not seek application aid, while 63% of students from an income bracket of $1,000,000 or more said they did. As household income increased, more students reported a use of admissions assistance.</p>
 
                 <section class="box-container">
                     <div class="box" onclick="changeChart0('IYU0h','2');">
                         <h5>ADMISSIONS ASSISTANCE/HOUSEHOLD INCOME</h5>
                     </div>
-                    <div class="box" onclick="changeChart0('Ux45E','2');">
+                    <!-- <div class="box" onclick="changeChart0('Ux45E','2');">
                         <h5>OTHER SCHOOLS ACCEPTED</h5>
-                    </div>
+                    </div> -->
                 </section>
                 
                 <section class="graph-container">
@@ -170,20 +170,54 @@
                     </figure>
                 </section>
 
-                <p>[add text]</p>
+                <p>Students also reported their SAT and ACT scores. The average SAT scores across all admissions cycles ranged from 1461 to 1474, with the highest average score among those accepted through EDII. All average ACT scores were in the range of 32 to 33, with the highest average among EDI applicants, although this is only 0.14% greater than the average in EDII.</p>
 
                 <section class="box-container">
                     <div class="box" onclick="changeChart0('33e5n','3');">
-                        <h5>AVERAGE SAT SCORES</h5>
+                        <h5>AVERAGE SAT SCORE IN EACH ADMISSION CYCLE</h5>
                     </div>
                     <div class="box" onclick="changeChart0('aKZDJ','3');">
-                        <h5>AVERAGE ACT SCORES</h5>
+                        <h5>AVERAGE ACT SCORE IN EACH ADMISSION CYCLE</h5>
                     </div>
                 </section>
                 
                 <section class="graph-container">
                     <figure class="big-image">
                         <div class="chart-container" id="chartContainer3"></div>
+                    </figure>
+                </section>
+
+                <p>The highest number of students applied to a total of 10 schools, with the second highest number of students applying to 20 schools. Only six students said they applied to Vanderbilt alone, while one applied to 60. The top three other universities students were accepted to included the University of Tennessee, Knoxville, the University of Wisconsin-Madison and the University of Michigan — with 27, 21 and 19 students accepted, respectively. Purdue University, Emory University and Pennsylvania State University were all also among the top ten.</p>
+
+                <section class="box-container">
+                    <div class="box" onclick="changeChart0('q2fLm','4');">
+                        <h5>NUMBER OF COLLEGES/UNIVERSITIES APPLIED TO</h5>
+                    </div>
+                    <div class="box" onclick="changeChart0('Ux45E','4');">
+                        <h5>OTHER SCHOOLS ACCEPTED</h5>
+                    </div>
+                </section>
+                
+                <section class="graph-container">
+                    <figure class="big-image">
+                        <div class="chart-container" id="chartContainer4"></div>
+                    </figure>
+                </section>
+
+                <p>Among respondents’ potential reasons for choosing to attend Vanderbilt, a majority of students cited academics as their deciding factor. Cost of attendance was the second most important factor, with student life and school name recognition following closely behind. </p>
+
+                <section class="box-container">
+                    <div class="box" onclick="changeChart0('Ey6bL','5');">
+                        <h5>VANDERBILT TOP CHOICE</h5>
+                    </div>
+                    <div class="box" onclick="changeChart0('CTORp','5');">
+                        <h5>REASONS FOR ATTENDING VANDERBILT</h5>
+                    </div>
+                </section>
+                
+                <section class="graph-container">
+                    <figure class="big-image">
+                        <div class="chart-container" id="chartContainer5"></div>
                     </figure>
                 </section>
 
@@ -207,6 +241,8 @@
             changeChart0('pcmxT', '1');
             changeChart0('IYU0h', '2');
             changeChart0('33e5n', '3');
+            changeChart0('q2fLm', '4');
+            changeChart0('Ey6bL', '5');
         }
 
         window.onload = firstGraph();
